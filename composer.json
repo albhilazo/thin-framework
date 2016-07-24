@@ -1,0 +1,21 @@
+{
+    "name": "albhilazo/thin-framework",
+    "type": "project",
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/albhilazo/thin-framework",
+    "authors": [
+        {
+            "name": "Albert Hilazo",
+            "email": "albhilazo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "ThinFramework\\": "src/ThinFramework/"
+        }
+    }
+}
