@@ -23,6 +23,10 @@ class Bootstrap
         $router = new Router($this->config['routing_path']);
 
         switch ($this->config['templating_engine']) {
+            case 'Smarty':
+                $templatingAdapter = '\ThinFramework\Component\Templating\SmartyAdapter';
+                break;
+
             default:
                 $templatingAdapter = '\ThinFramework\Component\Templating\TwigAdapter';
                 break;
