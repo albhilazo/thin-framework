@@ -33,7 +33,7 @@ class Bootstrap
         }
         $templating = new $templatingAdapter($this->config['templating_path']);
 
-        $router->getRoute($request)->call($templating);
+        $router->getRoute($request)->call($templating, $request);
     }
 
 }
