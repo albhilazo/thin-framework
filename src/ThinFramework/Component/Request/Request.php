@@ -33,4 +33,34 @@ class Request
         $this->path = parse_url($_SERVER['REQUEST_URI'])['path'];
     }
 
+
+    public function server()
+    {
+        return $this->server;
+    }
+
+
+    public function session()
+    {
+        return $this->session;
+    }
+
+
+    public function cookie()
+    {
+        return $this->cookie;
+    }
+
+
+    public function data()
+    {
+        return $this->data;
+    }
+
+
+    public function path()
+    {
+        return $this->path;
+    }
+
 }
