@@ -11,11 +11,6 @@ abstract class ThinController
     protected $response;
 
 
-    public function indexAction()
-    {
-    }
-
-
     protected function setResponse($content)
     {
         $this->response = new Response($content);
