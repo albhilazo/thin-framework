@@ -11,7 +11,8 @@ class JSONResponse extends Response
 
     public function send()
     {
-        header('Content-Type: application/json');
+        $this->setHeader('Content-Type', 'application/json');
+        $this->sendHeaders();
         $jsonContent = json_encode($this->content);
         echo $jsonContent;
     }
