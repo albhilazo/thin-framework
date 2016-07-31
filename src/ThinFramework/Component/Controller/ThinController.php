@@ -8,6 +8,9 @@ use ThinFramework\Component\Response\Response;
 abstract class ThinController
 {
 
+    protected $response;
+
+
     public function indexAction()
     {
     }
@@ -15,7 +18,7 @@ abstract class ThinController
 
     protected function setResponse($content)
     {
-        return new Response($content);
+        $this->response = new Response($content);
     }
 
 }
