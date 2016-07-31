@@ -9,7 +9,7 @@ class Request
     private $server;
     private $session;
     private $cookie;
-    private $request;
+    private $data;
 
 
     public function __construct()
@@ -22,11 +22,11 @@ class Request
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST')
         {
-            $this->request = $_POST;
+            $this->data = $_POST;
         }
         else if ($_SERVER['REQUEST_METHOD'] === 'GET')
         {
-            $this->request = $_GET;
+            $this->data = $_GET;
         }
     }
 
