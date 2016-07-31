@@ -36,7 +36,7 @@ class Bootstrap
         }
         $templating = $container->get($templatingAdapter);
 
-        $router->getRoute($request)->call($templating, $request);
+        $router->getRoute($request)->call($container, $templating, $request);
     }
 
 }
