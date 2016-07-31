@@ -16,9 +16,8 @@ class Router
     private $routes;
 
 
-    public function __construct($routingPath)
+    public function __construct(Parser $parser, $routingPath)
     {
-        $parser = new Parser();
         $this->routes = $parser->parse( file_get_contents($routingPath) );
     }
 
