@@ -19,7 +19,9 @@ class Bootstrap
 
     public function __invoke()
     {
-        new Router($this->config['routing_path']);
+        $router = new Router($this->config['routing_path']);
+        $currentPath = parse_url($_SERVER['REQUEST_URI'])['path'];
+        $route = $router->getRoute($currentPath);
     }
 
 }
