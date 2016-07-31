@@ -2,6 +2,8 @@
 
 namespace ThinFramework\Component\Router;
 
+use ThinFramework\Component\Templating\TemplatingAdapter;
+
 
 class Route
 {
@@ -23,10 +25,12 @@ class Route
     }
 
 
-    public function call()
+    public function call(TemplatingAdapter $templating)
     {
+        $controllerInstance = new $this->controller($templating);
+
         call_user_func_array(
-            [new $this->controller, $this->action],
+            [$controllerInstance, $this->action],
             $this->parameters
         );
     }

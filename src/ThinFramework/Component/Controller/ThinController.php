@@ -3,17 +3,26 @@
 namespace ThinFramework\Component\Controller;
 
 use ThinFramework\Component\Response\Response;
+use ThinFramework\Component\Templating\TemplatingAdapter;
 
 
 abstract class ThinController
 {
 
-    protected $response;
+    protected $template;
 
 
-    protected function setResponse($content)
+    public function __construct(TemplatingAdapter $templating)
     {
-        $this->response = new Response($content);
+        $this->template = $templating;
+    }
+
+
+    protected function sendResponse()
+    {
+        $output   = $this->template->render();
+        $response = new Response($output);
+        $response->send();
     }
 
 }

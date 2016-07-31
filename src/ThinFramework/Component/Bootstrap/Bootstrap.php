@@ -21,7 +21,15 @@ class Bootstrap
     public function __invoke(Request $request)
     {
         $router = new Router($this->config['routing_path']);
-        $router->getRoute($request)->call();
+
+        switch ($this->config['templating_engine']) {
+            default:
+                $templatingAdapter = '\ThinFramework\Component\Templating\TwigAdapter';
+                break;
+        }
+        $templating = new $templatingAdapter($this->config['templating_path']);
+
+        $router->getRoute($request)->call($templating);
     }
 
 }
