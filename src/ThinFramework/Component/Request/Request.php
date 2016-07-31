@@ -10,6 +10,7 @@ class Request
     private $session;
     private $cookie;
     private $data;
+    private $path;
 
 
     public function __construct()
@@ -28,6 +29,8 @@ class Request
         {
             $this->data = $_GET;
         }
+
+        $this->path = parse_url($_SERVER['REQUEST_URI'])['path'];
     }
 
 }
