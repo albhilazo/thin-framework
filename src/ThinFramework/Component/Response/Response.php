@@ -7,7 +7,8 @@ class Response
 {
 
     private $content;
-    private $headers;
+    private $headers = [];
+    private $status = 200;
 
 
     public function __construct($content)
@@ -28,6 +29,12 @@ class Response
     }
 
 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
     public function send()
     {
         $this->sendHeaders();
@@ -40,7 +47,7 @@ class Response
         foreach ($this->headers as $headerType => $headerValue) {
             header($headerType.": ".$headerValue);
         }
-        http_response_code(200);
+        http_response_code($this->status);
     }
 
 }
