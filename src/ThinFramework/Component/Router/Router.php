@@ -11,6 +11,7 @@ class Router
 {
 
     const PATH_PARAM_REGEX = "/^{(.*)}$/";
+    const E_404 = 'e404';
 
     private $routes;
 
@@ -35,6 +36,8 @@ class Router
 
             return $route;
         }
+
+        return $this->error404Route($request->path());
     }
 
 
@@ -114,6 +117,17 @@ class Router
     private function pathSectionDoesNotMatch($oneSection, $anotherSection)
     {
         return $oneSection !== $anotherSection;
+    }
+
+
+    private function error404Route($path)
+    {
+        return new Route(
+            $path,
+            $this->routes[self::E_404]['controller'],
+            null,
+            []
+        );
     }
 
 }
