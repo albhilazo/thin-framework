@@ -9,8 +9,6 @@ use ThinFramework\Component\Request\Request;
 class Bootstrap
 {
 
-    const DEFAULT_ACTION = 'indexAction';
-
     private $config;
 
 
@@ -23,20 +21,7 @@ class Bootstrap
     public function __invoke(Request $request)
     {
         $router = new Router($this->config['routing_path']);
-        $route = $router->getRoute($request);
-
-        $routeController = new $route['attributes']['controller']();
-        $routeAction = (isset($route['attributes']['action']))
-                        ? $route['attributes']['action']
-                        : self::DEFAULT_ACTION;
-        $routeParams = (isset($route['parameters']))
-                        ? $route['parameters']
-                        : [];
-
-        call_user_func_array(
-            [$routeController, $routeAction],
-            $routeParams
-        );
+        $router->getRoute($request)->call();
     }
 
 }

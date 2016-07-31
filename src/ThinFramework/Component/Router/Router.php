@@ -4,6 +4,7 @@ namespace ThinFramework\Component\Router;
 
 use Symfony\Component\Yaml\Parser;
 use ThinFramework\Component\Request\Request;
+use ThinFramework\Component\Router\Route;
 
 
 class Router
@@ -79,17 +80,12 @@ class Router
 
         if ($pathMatches)
         {
-            $route = array();
-
-            $route['route_id']   = $routeId;
-            $route['attributes'] = $routeAttributes;
-
-            if ($this->pathHasParameters($parameters))
-            {
-                $route['parameters'] = $parameters;
-            }
-
-            return $route;
+            return new Route(
+                $path,
+                $routeAttributes['controller'],
+                (isset($routeAttributes['action'])) ? $routeAttributes['action'] : '',
+                $parameters
+            );
         }
     }
 
@@ -118,12 +114,6 @@ class Router
     private function pathSectionDoesNotMatch($oneSection, $anotherSection)
     {
         return $oneSection !== $anotherSection;
-    }
-
-
-    private function pathHasParameters($parameters)
-    {
-        return !empty($parameters);
     }
 
 }
