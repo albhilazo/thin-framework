@@ -3,6 +3,7 @@
 namespace ThinFramework\Component\Router;
 
 use Symfony\Component\Yaml\Parser;
+use ThinFramework\Component\Request\Request;
 
 
 class Router
@@ -20,11 +21,11 @@ class Router
     }
 
 
-    public function getRoute($path)
+    public function getRoute(Request $request)
     {
         foreach ($this->routes as $routeId => $routeAttributes)
         {
-            $route = $this->checkIfConfiguredRoute($path, $routeId, $routeAttributes);
+            $route = $this->checkIfConfiguredRoute($request->path(), $routeId);
 
             if (!isset($route))
             {
@@ -36,8 +37,10 @@ class Router
     }
 
 
-    private function checkIfConfiguredRoute($path, $routeId, $routeAttributes)
+    private function checkIfConfiguredRoute($path, $routeId)
     {
+        $routeAttributes = $this->routes[$routeId];
+
         if ($this->routeHasNoPath($routeAttributes))
         {
             return;

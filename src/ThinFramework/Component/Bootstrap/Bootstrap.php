@@ -3,6 +3,7 @@
 namespace ThinFramework\Component\Bootstrap;
 
 use ThinFramework\Component\Router\Router;
+use ThinFramework\Component\Request\Request;
 
 
 class Bootstrap
@@ -19,11 +20,10 @@ class Bootstrap
     }
 
 
-    public function __invoke()
+    public function __invoke(Request $request)
     {
         $router = new Router($this->config['routing_path']);
-        $currentPath = parse_url($_SERVER['REQUEST_URI'])['path'];
-        $route = $router->getRoute($currentPath);
+        $route = $router->getRoute($request);
 
         $routeController = new $route['attributes']['controller']();
         $routeAction = (isset($route['attributes']['action']))
